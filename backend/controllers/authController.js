@@ -1,39 +1,25 @@
-import jwt from 'jsonwebtoken';
-import { User } from '../models/index.js';
+import AuthService from '../services/AuthService.js';
+import { asyncHandler } from '../middleware/asyncHandler.js';
 
-export const login = async (req, res) => {
+export const login = asyncHandler(async (req, res) => {
   const { userId, password } = req.body;
+  // Pass res so AuthService can set the HTTP-only refresh cookie
+  const result = await AuthService.login(userId, password, res);
+  res.status(200).json(result);
+});
 
-  try {
-    const user = await User.findOne({ where: { userId } });
+export const refresh = asyncHandler(async (req, res) => {
+  // Read cookie and issue new access + refresh tokens
+  const result = await AuthService.refreshAccessToken(req, res);
+  res.status(200).json(result);
+});
 
-    if (user && (await user.comparePassword(password))) {
-      const token = jwt.sign(
-        { id: user.id, role: user.role },
-        process.env.JWT_SECRET,
-        { expiresIn: '30d' }
-      );
+export const logout = asyncHandler(async (req, res) => {
+  AuthService.logout(res);
+  res.status(200).json({ message: 'Logged out successfully.' });
+});
 
-      res.json({
-        id: user.id,
-        userId: user.userId,
-        name: user.name,
-        role: user.role,
-        email: user.email,
-        mobile: user.mobile,
-        address: user.address,
-        hospitalName: user.hospitalName,
-        certifiedId: user.certifiedId,
-        token
-      });
-    } else {
-      res.status(401).json({ message: 'Invalid User ID or Password' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-
-export const getMe = async (req, res) => {
-  res.json(req.user);
-};
+export const getMe = asyncHandler(async (req, res) => {
+  const user = await AuthService.getCurrentUser(req.user.id);
+  res.status(200).json(user);
+});

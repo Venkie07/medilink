@@ -23,6 +23,11 @@ const Appointment = sequelize.define('Appointment', {
     type: DataTypes.TEXT,
     allowNull: true
   }
+}, {
+  indexes: [
+    { fields: ['patientId'] },
+    { fields: ['doctorId'] }
+  ]
 });
 
 export default Appointment;

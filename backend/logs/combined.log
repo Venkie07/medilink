@@ -1,0 +1,5 @@
+[2026-05-21 22:57:57:5757] [[32minfo[39m]: [32mConnecting to local SQLite database...[39m
+[2026-05-21 22:57:57:5757] [[33mwarn[39m]: [33mSupabase credentials missing. Cloud uploads will fallback or be unavailable.[39m
+[2026-05-21 22:57:58:5758] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-21 22:57:58:5758] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-21 22:57:58:5758] [[32minfo[39m]: [32mEnvironment: development[39m

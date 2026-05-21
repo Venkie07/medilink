@@ -1,77 +1,27 @@
-import { Appointment, Patient, User } from '../models/index.js';
+import AppointmentService from '../services/AppointmentService.js';
+import { asyncHandler } from '../middleware/asyncHandler.js';
 
-export const createAppointment = async (req, res) => {
-  const { patientId, doctorId, date, time, reason } = req.body;
+export const createAppointment = asyncHandler(async (req, res) => {
+  const appointment = await AppointmentService.createAppointment(req.body, req.user.id);
+  res.status(201).json(appointment);
+});
 
-  try {
-    const appointment = await Appointment.create({
-      patientId,
-      doctorId: req.user.id,
-      date,
-      time,
-      reason
-    });
-    res.status(201).json(appointment);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
+export const getAppointments = asyncHandler(async (req, res) => {
+  const appointments = await AppointmentService.getAppointmentsForRole(req.user.id, req.user.role);
+  res.status(200).json(appointments);
+});
 
-export const getAppointments = async (req, res) => {
-  try {
-    const where = {};
-    if (req.user.role === 'Doctor') where.doctorId = req.user.id;
-    if (req.user.role === 'Patient') {
-        const patient = await Patient.findOne({ where: { userId: req.user.id } });
-        where.patientId = patient.id;
-    }
+export const updateAppointmentStatus = asyncHandler(async (req, res) => {
+  const appointment = await AppointmentService.updateAppointmentStatus(
+    req.params.id,
+    req.body.status,
+    req.user.id,
+    req.user.role
+  );
+  res.status(200).json(appointment);
+});
 
-    const appointments = await Appointment.findAll({
-      where,
-      include: [
-          { model: Patient, as: 'patient', include: [{ model: User, as: 'user', attributes: ['name'] }] },
-          { model: User, as: 'doctor', attributes: ['name'] }
-      ]
-    });
-    res.json(appointments);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-export const updateAppointmentStatus = async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-
-  try {
-    const appointment = await Appointment.findByPk(id);
-    if (!appointment) {
-      return res.status(404).json({ message: 'Appointment not found' });
-    }
-
-    appointment.status = status;
-    await appointment.save();
-    res.json(appointment);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-export const deleteAppointment = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const appointment = await Appointment.findByPk(id);
-    if (!appointment) {
-      return res.status(404).json({ message: 'Appointment not found' });
-    }
-
-    // Optional: Check if the doctor is the one who created it
-    if (appointment.doctorId !== req.user.id) {
-        return res.status(403).json({ message: 'Unauthorized' });
-    }
-
-    await appointment.destroy();
-    res.json({ message: 'Appointment deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
+export const deleteAppointment = asyncHandler(async (req, res) => {
+  await AppointmentService.deleteAppointment(req.params.id, req.user.id, req.user.role);
+  res.status(200).json({ message: 'Appointment deleted successfully' });
+});

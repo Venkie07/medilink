@@ -1,14 +1,7 @@
 import path from 'path';
 import multer from 'multer';
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/reports/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
@@ -20,7 +13,7 @@ const upload = multer({
     if (extname && mimetype) {
       return cb(null, true);
     } else {
-      cb('Error: Only Images and PDFs are allowed!');
+      cb(new Error('Only Images and PDFs are allowed!'));
     }
   }
 });

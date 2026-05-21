@@ -105,12 +105,12 @@ const PatientDashboard = () => {
                                         <p className="font-bold text-slate-700">{a.doctor?.name}</p>
                                         <p className="text-xs text-slate-500">{new Date(a.date).toLocaleDateString()} at {a.time}</p>
                                     </div>
-                                    <span className={`px- 2 py - 1 rounded - lg text - [10px] font - bold uppercase ${
-        a.status === 'Pending' ? 'bg-amber-100 text-amber-600' :
-            a.status === 'Attended' ? 'bg-emerald-100 text-emerald-600' :
-                a.status === 'Missed' ? 'bg-rose-100 text-rose-600' :
-                    'bg-slate-100 text-slate-600'
-    }`}>
+                                    <span className={`px-2 py-1 rounded-lg text-[10px] font-bold uppercase ${
+                                        a.status === 'Pending' ? 'bg-amber-100 text-amber-600' :
+                                        a.status === 'Attended' ? 'bg-emerald-100 text-emerald-600' :
+                                        a.status === 'Missed' ? 'bg-rose-100 text-rose-600' :
+                                        'bg-slate-100 text-slate-600'
+                                    }`}>
                                         {a.status}
                                     </span>
                                 </div>
@@ -137,19 +137,19 @@ const PatientDashboard = () => {
                                     </div>
                                     <button
                                         onClick={() => window.open(`http://localhost:5000/${t.report?.filePath}`)}
-        className = "p-2 text-primary-600 hover:bg-primary-50 rounded-xl transition-all"
-        >
-        <Download size={20} />
-                                    </button >
-                                </div >
+                                        className="p-2 text-primary-600 hover:bg-primary-50 rounded-xl transition-all"
+                                    >
+                                        <Download size={20} />
+                                    </button>
+                                </div>
                             ))
                         }
-                    </div >
-                </div >
-            </div >
+                    </div>
+                </div>
+            </div>
 
-    {/* Prescriptions */ }
-    < div className = "glass-card p-6" >
+            {/* Prescriptions */}
+            <div className="glass-card p-6">
                 <h3 className="text-xl font-bold mb-6">Recent Prescriptions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {prescriptions.map(p => (
@@ -176,8 +176,8 @@ const PatientDashboard = () => {
                     ))}
                     {prescriptions.length === 0 && <p className="col-span-full text-center py-8 text-slate-400 italic">No prescriptions found</p>}
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 };
 

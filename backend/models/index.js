@@ -2,6 +2,7 @@ import User from './User.js';
 import Patient from './Patient.js';
 import Appointment from './Appointment.js';
 import Prescription from './Prescription.js';
+import PrescriptionItem from './PrescriptionItem.js';
 import LabTest from './LabTest.js';
 import LabReport from './LabReport.js';
 import sequelize from '../config/database.js';
@@ -27,6 +28,10 @@ Prescription.belongsTo(User, { foreignKey: 'doctorId', as: 'doctor' });
 Patient.hasMany(Prescription, { foreignKey: 'patientId', as: 'prescriptions' });
 Prescription.belongsTo(Patient, { foreignKey: 'patientId', as: 'patient' });
 
+// PrescriptionItems relationships
+Prescription.hasMany(PrescriptionItem, { foreignKey: 'prescriptionId', as: 'medications', onDelete: 'CASCADE' });
+PrescriptionItem.belongsTo(Prescription, { foreignKey: 'prescriptionId', as: 'prescription' });
+
 // Lab Tests relationships
 Patient.hasMany(LabTest, { foreignKey: 'patientId', as: 'labTests' });
 LabTest.belongsTo(Patient, { foreignKey: 'patientId', as: 'patient' });
@@ -46,6 +51,7 @@ export {
   Patient,
   Appointment,
   Prescription,
+  PrescriptionItem,
   LabTest,
   LabReport,
   sequelize

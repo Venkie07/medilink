@@ -7,10 +7,6 @@ const Prescription = sequelize.define('Prescription', {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
-  medications: {
-    type: DataTypes.JSON, // Array of medications
-    allowNull: false
-  },
   instructions: {
     type: DataTypes.TEXT,
     allowNull: true
@@ -23,6 +19,12 @@ const Prescription = sequelize.define('Prescription', {
     type: DataTypes.ENUM('Active', 'Dispensed'),
     defaultValue: 'Active'
   }
+}, {
+  indexes: [
+    { fields: ['patientId'] },
+    { fields: ['doctorId'] },
+    { fields: ['appointmentId'] }
+  ]
 });
 
 export default Prescription;

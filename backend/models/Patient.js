@@ -24,6 +24,10 @@ const Patient = sequelize.define('Patient', {
     type: DataTypes.TEXT,
     allowNull: true
   }
+}, {
+  indexes: [
+    { fields: ['userId'] }
+  ]
 });
 
 export default Patient;

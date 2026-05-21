@@ -1,33 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary: #3b82f6;
-  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  --primary: #2563eb;
+  --success: #059669;
+  --warning: #d97706;
+  --error: #dc2626;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
 }
 
 body {
-  @apply antialiased text-slate-800;
-  background: var(--bg-gradient);
+  font-family: 'Inter', sans-serif;
+  @apply antialiased bg-[#f8fafc] text-slate-800;
   min-height: 100vh;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Transform Glassmorphism to High-Grade Clinical Surface Primitives */
 .glass-card {
-  @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl rounded-2xl;
+  @apply bg-white border border-[#e2e8f0] shadow-sm rounded-2xl transition-all duration-200 hover:shadow-md;
 }
 
 .btn-primary {
-  @apply px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors shadow-md hover:shadow-lg disabled:opacity-50;
+  @apply px-4 py-2.5 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-all shadow-sm hover:shadow active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+}
+
+.btn-secondary {
+  @apply px-4 py-2.5 bg-white border border-slate-200 text-slate-700 font-medium rounded-xl hover:bg-slate-50 hover:text-slate-900 active:bg-slate-100 transition-all active:scale-[0.98] disabled:opacity-50;
 }
 
 .input-field {
-  @apply w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all bg-white/50;
+  @apply w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all placeholder-slate-400;
 }
 
-/* Fix for full screen blur coverage */
-.space-y-8 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(0rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+/* Custom Scrollbar for professional medical EHR list views */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-50;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300;
 }

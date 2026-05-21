@@ -2,32 +2,32 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
 import StatsCard from '../../components/StatsCard';
-import { FlaskConical, Upload, CheckCircle, Search, Clock } from 'lucide-react';
+import { FlaskConical, Upload, CheckCircle, Search, Clock, FileText } from 'lucide-react';
 
 const LabDashboard = () => {
     const [tests, setTests] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [selectedTest, setSelectedTest] = useState(null);
     const [reportFile, setReportFile] = useState(null);
     const [summary, setSummary] = useState('');
     const [searchId, setSearchId] = useState('');
+    const [filterQuery, setFilterQuery] = useState('');
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        if (!searchId) return;
-        
+    useEffect(() => {
+        fetchTests();
+    }, []);
+
+    const fetchTests = async () => {
+        setLoading(true);
         try {
             const { data } = await api.get('/lab/tests');
-            // Filter by patient ID or Name if needed, but the user specifically asked for Patient ID access
-            const patientTests = data.filter(t => 
-                t.patient?.patientId?.toLowerCase() === searchId.toLowerCase() ||
-                t.patient?.user?.userId?.toLowerCase() === searchId.toLowerCase()
-            );
-            setTests(patientTests);
-            if (patientTests.length === 0) alert('No tests found for this Patient ID');
+            setTests(data);
         } catch (err) {
             console.error(err);
-            toast.error('Error fetching tests');
+            toast.error('Failed to load laboratory queue');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -45,22 +45,14 @@ const LabDashboard = () => {
             await api.post('/lab/upload', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            toast.success('Report uploaded successfully!');
+            toast.success('Lab Report Uploaded Successfully!');
             setSelectedTest(null);
             setReportFile(null);
             setSummary('');
-            // Trigger a re-search to refresh the list
-            if (searchId) {
-                const { data: allTests } = await api.get('/lab/tests');
-                const patientTests = allTests.filter(t => 
-                    t.patient?.patientId?.toLowerCase() === searchId.toLowerCase() ||
-                    t.patient?.user?.userId?.toLowerCase() === searchId.toLowerCase()
-                );
-                setTests(patientTests);
-            }
+            fetchTests(); // Refresh the dynamic lab tests queue
         } catch (err) {
             console.error(err);
-            toast.error('Upload failed');
+            toast.error('Lab report upload failed.');
         } finally {
             setUploading(false);
         }
@@ -69,112 +61,162 @@ const LabDashboard = () => {
     const pendingTests = tests.filter(t => t.status === 'Requested');
     const completedTests = tests.filter(t => t.status === 'Completed');
 
+    // Filter queue by searchId or patient name
+    const filteredTests = tests.filter(t => {
+        const matchesSearch = !searchId || 
+            t.patient?.patientId?.toLowerCase().includes(searchId.toLowerCase()) ||
+            t.patient?.user?.userId?.toLowerCase().includes(searchId.toLowerCase());
+
+        const matchesFilter = !filterQuery ||
+            t.testName?.toLowerCase().includes(filterQuery.toLowerCase()) ||
+            t.patient?.user?.name?.toLowerCase().includes(filterQuery.toLowerCase());
+
+        return matchesSearch && matchesFilter;
+    });
+
     return (
-        <div className="space-y-8">
-            <div className="glass-card p-8 bg-gradient-to-br from-primary-600 to-primary-700 text-white">
-                <div className="max-w-xl">
-                    <h2 className="text-2xl font-bold mb-2">Diagnostic Access Terminal</h2>
-                    <p className="text-primary-100 text-sm mb-6 opacity-90">Enter a Patient ID to access assigned laboratory tests and upload reports.</p>
-                    <form onSubmit={handleSearch} className="flex gap-4">
-                        <div className="flex-1 relative">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-primary-400" size={20} />
-                            <input 
-                                className="w-full bg-white/10 border border-white/20 rounded-2xl py-3 pl-12 pr-4 text-white placeholder:text-primary-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all font-medium"
-                                placeholder="Enter Patient ID (e.g. MEDI-1234)..."
-                                value={searchId}
-                                onChange={e => setSearchId(e.target.value)}
-                            />
-                        </div>
-                        <button type="submit" className="px-8 py-3 bg-white text-primary-700 font-bold rounded-2xl hover:bg-primary-50 transition-all shadow-lg active:scale-95">
-                            Search
-                        </button>
-                    </form>
-                </div>
+        <div className="space-y-6">
+            {/* Clinical Page Header */}
+            <div>
+                <h1 className="text-2xl font-bold text-slate-900">Diagnostic Laboratory Dispatch</h1>
+                <p className="text-sm text-slate-500">Manage real-time pending patient diagnostic requests and file uploads.</p>
             </div>
-            <br></br>
-            {tests.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-4 duration-500">
-                    <StatsCard title="Pending Requests" value={pendingTests.length} icon={Clock} color="bg-amber-500" />
-                    <StatsCard title="Completed Tests" value={completedTests.length} icon={CheckCircle} color="bg-emerald-500" />
-                </div>
-            )}
-            <br></br>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Pending Test Requests */}
-                <div className="glass-card p-6">
-                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                        <FlaskConical className="text-primary-600" /> Pending Lab Requests
-                    </h3>
-                    <div className="space-y-4">
-                        {pendingTests.length === 0 ? (
-                            <p className="text-slate-400 italic text-center py-8">No pending requests</p>
-                        ) : (
-                            pendingTests.map(test => (
-                                <div key={test.id} className="flex items-center justify-between p-4 bg-white/50 rounded-2xl border border-white hover:shadow-md transition-all">
-                                    <div>
-                                        <p className="font-bold text-slate-700">{test.testName}</p>
-                                        <p className="text-xs text-slate-500">Patient: {test.patient?.user?.name} ({test.patient?.patientId})</p>
-                                        <p className="text-[10px] text-slate-400">Dr. {test.doctor?.name}</p>
-                                    </div>
-                                    <button 
-                                        onClick={() => setSelectedTest(test)}
-                                        className="p-2 text-primary-600 hover:bg-primary-50 rounded-xl transition-all"
-                                    >
-                                        <Upload size={20} />
-                                    </button>
+
+            {/* Live Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <StatsCard title="Pending Requests" value={pendingTests.length} icon={Clock} color="bg-amber-600" />
+                <StatsCard title="Completed Reports" value={completedTests.length} icon={CheckCircle} color="bg-emerald-600" />
+                <StatsCard title="Active Laboratory Load" value={tests.length} icon={FlaskConical} color="bg-blue-600" />
+            </div>
+
+            {/* Main Terminal Queue & Action layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                {/* Search & Left sidebar queue */}
+                <div className="lg:col-span-2 space-y-4">
+                    <div className="glass-card p-6">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <FlaskConical className="text-blue-600" size={20} /> Live Diagnostic Queue
+                            </h3>
+                            <div className="flex gap-2 w-full sm:w-auto">
+                                <div className="relative flex-1 sm:w-48">
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+                                    <input
+                                        className="w-full text-xs pl-8 pr-3 py-1.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                        placeholder="Search patient..."
+                                        value={filterQuery}
+                                        onChange={e => setFilterQuery(e.target.value)}
+                                    />
                                 </div>
-                            ))
+                                <button 
+                                    onClick={fetchTests}
+                                    className="p-1.5 bg-slate-50 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-100 text-xs transition"
+                                >
+                                    Refresh
+                                </button>
+                            </div>
+                        </div>
+
+                        {loading ? (
+                            <div className="py-12 text-center text-slate-400 text-sm">
+                                Loading clinical queue...
+                            </div>
+                        ) : filteredTests.length === 0 ? (
+                            <div className="py-16 text-center text-slate-400 italic text-sm">
+                                No diagnostic test assignments available in the queue.
+                            </div>
+                        ) : (
+                            <div className="space-y-3">
+                                {filteredTests.map(test => (
+                                    <div 
+                                        key={test.id} 
+                                        onClick={() => test.status === 'Requested' && setSelectedTest(test)}
+                                        className={`flex items-center justify-between p-4 rounded-xl border transition-all cursor-pointer ${
+                                            selectedTest?.id === test.id
+                                                ? 'bg-blue-50/50 border-blue-300 shadow-sm'
+                                                : test.status === 'Completed'
+                                                ? 'bg-slate-50/50 border-slate-100 opacity-75 cursor-default'
+                                                : 'bg-white border-slate-200 hover:shadow-sm hover:border-slate-300'
+                                        }`}
+                                    >
+                                        <div className="space-y-1">
+                                            <p className="font-bold text-slate-800 text-sm">{test.testName}</p>
+                                            <p className="text-xs text-slate-500">Patient: <span className="font-medium text-slate-700">{test.patient?.user?.name}</span> ({test.patient?.patientId})</p>
+                                            <p className="text-[10px] text-slate-400">Ordered by Dr. {test.doctor?.name}</p>
+                                        </div>
+                                        <div className="flex items-center gap-3">
+                                            <span className={`px-2.5 py-0.5 text-[10px] font-semibold rounded-full ${
+                                                test.status === 'Completed' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                                            }`}>
+                                                {test.status}
+                                            </span>
+                                            {test.status === 'Requested' && (
+                                                <button className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition">
+                                                    <Upload size={16} />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         )}
                     </div>
                 </div>
 
-                {/* Report Upload Form (Conditional) */}
-                <div className="glass-card p-6">
-                    <h3 className="text-xl font-bold mb-6">Report Action</h3>
-                    {selectedTest ? (
-                        <form onSubmit={handleUpload} className="space-y-4 animate-in fade-in slide-in-from-bottom-2">
-                            <div className="p-4 bg-primary-50 rounded-2xl mb-4">
-                                <p className="text-sm font-bold text-primary-700">Test: {selectedTest.testName}</p>
-                                <p className="text-xs text-primary-600">Patient: {selectedTest.patient?.user?.name}</p>
-                            </div>
-                            
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Upload Report (PDF/Image)</label>
-                                <input 
-                                    type="file" 
-                                    className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
-                                    onChange={e => setReportFile(e.target.files[0])}
-                                    required
-                                />
-                            </div>
+                {/* Right sidebar action box */}
+                <div className="lg:col-span-1">
+                    <div className="glass-card p-6">
+                        <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <FileText size={18} className="text-blue-600" /> Dispatch Report
+                        </h3>
+                        {selectedTest ? (
+                            <form onSubmit={handleUpload} className="space-y-4 animate-in fade-in duration-200">
+                                <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-xl mb-4">
+                                    <p className="text-xs font-semibold text-blue-800 uppercase tracking-wider">Active Test</p>
+                                    <p className="text-sm font-bold text-slate-800 mt-1">{selectedTest.testName}</p>
+                                    <p className="text-xs text-slate-500">Patient: {selectedTest.patient?.user?.name}</p>
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Select Report File (PDF/Image)</label>
+                                    <input 
+                                        type="file" 
+                                        className="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                        onChange={e => setReportFile(e.target.files[0])}
+                                        required
+                                    />
+                                </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Result Summary</label>
-                                <textarea 
-                                    className="input-field min-h-[100px]" 
-                                    placeholder="Enter brief summary of results..."
-                                    value={summary}
-                                    onChange={e => setSummary(e.target.value)}
-                                    required
-                                />
-                            </div>
+                                <div>
+                                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Diagnostic Summary</label>
+                                    <textarea 
+                                        className="input-field min-h-[120px] text-sm" 
+                                        placeholder="Enter clinical observations, measurements, or diagnostic results..."
+                                        value={summary}
+                                        onChange={e => setSummary(e.target.value)}
+                                        required
+                                    />
+                                </div>
 
-                            <div className="flex gap-3">
-                                <button type="submit" className="btn-primary flex-1" disabled={uploading}>
-                                    {uploading ? 'Uploading...' : 'Submit Report'}
-                                </button>
-                                <button type="button" onClick={() => setSelectedTest(null)} className="px-4 py-2 text-slate-500 hover:bg-slate-100 rounded-xl transition-all">
-                                    Cancel
-                                </button>
+                                <div className="flex gap-2 pt-2">
+                                    <button type="submit" className="btn-primary flex-1 py-2 text-sm" disabled={uploading}>
+                                        {uploading ? 'Uploading...' : 'Submit Report'}
+                                    </button>
+                                    <button type="button" onClick={() => setSelectedTest(null)} className="px-3 py-2 text-xs font-semibold text-slate-500 hover:bg-slate-100 rounded-lg transition">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        ) : (
+                            <div className="py-16 text-center text-slate-400 flex flex-col items-center justify-center">
+                                <Upload size={32} className="mb-2 opacity-30 text-blue-600" />
+                                <p className="text-xs italic">Select a pending request from the live queue to upload results.</p>
                             </div>
-                        </form>
-                    ) : (
-                        <div className="h-full flex flex-col items-center justify-center text-slate-400 py-12">
-                            <Upload size={40} className="mb-2 opacity-20" />
-                            <p className="text-sm italic">Select a test request to upload results</p>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
+
             </div>
         </div>
     );

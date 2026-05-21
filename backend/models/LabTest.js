@@ -19,6 +19,12 @@ const LabTest = sequelize.define('LabTest', {
     type: DataTypes.DATEONLY,
     defaultValue: DataTypes.NOW
   }
+}, {
+  indexes: [
+    { fields: ['patientId'] },
+    { fields: ['doctorId'] },
+    { fields: ['status'] }
+  ]
 });
 
 export default LabTest;
