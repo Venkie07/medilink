@@ -1,0 +1,88 @@
+MEDILINK PROJECT DETAILS
+
+1. TECH STACK
+-------------
+Frontend:
+- React.js: Core library for building the user interface.
+- Vite: Fast build tool and development server.
+- Tailwind CSS: For modern, responsive styling and glassmorphism UI.
+- Lucide React: For consistent and clean iconography.
+- React Router Dom: Handles role-based routing and navigation.
+- React Hot Toast: For real-time notifications and alerts.
+- Context API: For global state management (Authentication and User data).
+- Axios: For handling API requests to the backend.
+
+Backend:
+- Node.js: Runtime environment for the server.
+- Express.js: Framework for building the RESTful API.
+- Sequelize: ORM for database management and relationships.
+- SQLite: Lightweight database for storing users, patients, and health records.
+- JWT (JSON Web Tokens): For secure, token-based authentication.
+- Bcrypt: For hashing and securing user passwords.
+
+2. SYSTEM FEATURES
+------------------
+General Features:
+- Secure Login System: Role-based access control with password visibility toggle.
+- Dynamic Sidebar: Simplified navigation showing only "Dashboard" and "My Profile" (plus role-specific links like Appointments).
+- Centralized Profile Management: All users can view and update their personal details.
+
+Admin Features:
+- User Management: Full CRUD access to all users (Doctors, Patients, Lab Technicians, Pharmacists).
+- Profile Editing: Ability to edit any user's details including name, age, email, mobile, and role-specific fields (like Hospital Name or Pharmacy Name).
+- System Overview: High-level metrics of the entire platform.
+
+Doctor Features:
+- Patient Registration: Enroll new patients into the MediLink system.
+- Appointment Scheduling: Schedule visits for patients with specific reasons and timings.
+- Attendance Management: Dedicated dashboard to mark patients as "Arrived" or "Not Arrived" (enabled on the day of appointment).
+- Prescription Management: Write digital prescriptions with multiple medications and instructions.
+- Lab Requests: Order specific lab tests for patients.
+- Record Reflection: View recent prescriptions and lab reports assigned to their patients.
+
+Patient Features:
+- Personal Health Hub: Centralized view of all medical history.
+- Digital MediLink Card: A printable identity card containing QR-safe patient details.
+- Health Records: View all past/upcoming appointments, lab reports (with download option), and prescriptions.
+
+Lab Technician Features:
+- Lab Queue: View pending lab requests from doctors.
+- Report Uploading: Attach medical reports and summaries to completed tests.
+
+Pharmacy Features:
+- Prescription Retrieval: Search and view prescriptions assigned to patients.
+- Processing: Mark prescriptions as "Dispensed" once medicine is provided.
+
+3. WEBSITE FLOW
+---------------
+Step 1: Authentication
+Users log in through a unified login page. The system identifies their role (Admin, Doctor, Patient, etc.) and redirects them to their specialized dashboard.
+
+Step 2: Admin Setup (If needed)
+Admins ensure all staff (Doctors, Labs, etc.) are registered. They have the power to fix any data discrepancies through the User Editing system.
+
+Step 3: Patient Intake
+A Doctor registers a patient during their first visit. The patient can immediately log in to see their profile.
+
+Step 4: Clinical Workflow
+- The Doctor schedules an Appointment. 
+- On the day of the visit, the Doctor marks the patient as "Attended" in the Appointments dashboard.
+- During the consultation, the Doctor writes a Prescription or requests a Lab Test.
+
+Step 5: Record Fulfillment
+- The Pharmacist sees the new prescription and dispenses the medicine.
+- The Lab Technician performs the test and uploads the PDF/Image report.
+
+Step 6: Patient Review
+The Patient logs into their Health Hub to download the lab report, check medication frequency from the prescription, or view the date of their next check-up.
+
+4. UI/UX DESIGN PHILOSOPHY
+--------------------------
+- Glassmorphism: Semi-transparent backgrounds with blur effects for a premium "Apple-like" aesthetic.
+- Modern Typography: Clean sans-serif fonts (Inter/Outfit) for maximum readability.
+- Consistent Color Coding:
+  - Blue: General information and Admin actions.
+  - Emerald: Successful actions, attended status, and pharmacies.
+  - Amber: Pending tasks and appointments.
+  - Rose: Critical actions, missed appointments, and errors.
+- Visual Feedback: Real-time toasts and interactive hover states ensure the user always feels in control.
