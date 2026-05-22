@@ -19,12 +19,6 @@ import labRoutes from './routes/lab.js';
 
 dotenv.config();
 
-// Ensure upload directory exists (temporary — will be replaced by Supabase Storage in Phase 4)
-const uploadDir = 'uploads/reports';
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
 // Ensure logs directory exists
 const logsDir = 'logs';
 if (!fs.existsSync(logsDir)) {
@@ -75,9 +69,6 @@ app.use((req, res, next) => {
 
 // Audit trail logger for mutating operations
 app.use(auditLog);
-
-// Static file serving (temporary — removed in Phase 4)
-app.use('/uploads', express.static('uploads'));
 
 // ---------------------
 // API Routes (v1)

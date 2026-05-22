@@ -4,11 +4,6 @@ import { AppError } from '../middleware/errorHandler.js';
 
 class StorageService {
   async uploadFile(bucketName, file, destinationPath) {
-    if (!supabase) {
-      logger.warn('Supabase storage unavailable. Falling back to mock local path.');
-      return `uploads/mock_${Date.now()}_${file.originalname}`;
-    }
-
     const { data, error } = await supabase.storage
       .from(bucketName)
       .upload(destinationPath, file.buffer, {
@@ -26,11 +21,6 @@ class StorageService {
   }
 
   async getSignedUrl(bucketName, filePath, expiresSeconds = 900) {
-    if (!supabase) {
-      logger.warn('Supabase client unavailable. Returning mock signed URL.');
-      return `http://localhost:5000/${filePath}`;
-    }
-
     const { data, error } = await supabase.storage
       .from(bucketName)
       .createSignedUrl(filePath, expiresSeconds);
@@ -44,8 +34,6 @@ class StorageService {
   }
 
   async deleteFile(bucketName, filePath) {
-    if (!supabase) return;
-
     const { error } = await supabase.storage
       .from(bucketName)
       .remove([filePath]);

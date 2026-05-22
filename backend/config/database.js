@@ -4,35 +4,32 @@ import logger from '../utils/logger.js';
 
 dotenv.config();
 
-let sequelize;
+const databaseUrl = process.env.DATABASE_URL;
 
-if (process.env.DATABASE_URL) {
-  logger.info('Connecting to production PostgreSQL/Supabase database...');
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false, // Required for secure Supabase connectivity
-      },
-    },
-    // Pool settings optimized for stateless Vercel Serverless execution
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000,
-    },
-    logging: false,
-  });
-} else {
-  logger.info('Connecting to local SQLite database...');
-  sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './medilink.sqlite',
-    logging: false,
-  });
+if (!databaseUrl) {
+  logger.error('CRITICAL: DATABASE_URL environment variable is missing.');
+  throw new Error('Database configuration failed: DATABASE_URL environment variable is required.');
 }
+
+logger.info('Connecting to production PostgreSQL/Supabase database...');
+
+const sequelize = new Sequelize(databaseUrl, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // Required for secure Supabase connectivity
+    },
+  },
+  // Pool settings optimized for stateless Vercel Serverless execution
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+  logging: false,
+});
 
 export default sequelize;

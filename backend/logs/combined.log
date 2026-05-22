@@ -3,3 +3,73 @@
 [2026-05-21 22:57:58:5758] [[32minfo[39m]: [32mDatabase synced successfully[39m
 [2026-05-21 22:57:58:5758] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
 [2026-05-21 22:57:58:5758] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 19:43:57:4357] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:43:57:4357] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:44:03:443] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 19:44:03:443] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 19:44:03:443] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 19:56:44:5644] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:56:44:5644] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:56:55:5655] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 19:56:55:5655] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 19:56:55:5655] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 19:56:56:5656] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:56:56:5656] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:57:13:5713] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:57:13:5713] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:57:18:5718] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 19:57:18:5718] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 19:57:18:5718] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 19:57:19:5719] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:57:19:5719] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:57:45:5745] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:57:45:5745] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:57:51:5751] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 19:57:51:5751] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 19:57:51:5751] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 19:58:05:585] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:58:06:586] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:58:12:5812] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 19:58:12:5812] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 19:58:12:5812] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 19:59:37:5937] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 19:59:37:5937] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 19:59:50:5950] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 19:59:50:5950] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 19:59:50:5950] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 20:02:44:244] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 20:02:45:245] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 20:02:48:248] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 20:02:48:248] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 20:02:48:248] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 20:03:01:31] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 20:03:01:31] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 20:14:36:1436] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-22 20:14:36:1436] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-22 20:14:40:1440] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-22 20:14:40:1440] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-22 20:14:40:1440] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-22 20:15:05:155] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:05:155] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:05.133Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":781,"ip":"::1"}[39m
+[2026-05-22 20:15:17:1517] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:17:1517] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:17.774Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":737,"ip":"::1"}[39m
+[2026-05-22 20:15:29:1529] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:29:1529] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:29.382Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":809,"ip":"::1"}[39m
+[2026-05-22 20:15:31:1531] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:31:1531] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:31.298Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":633,"ip":"::1"}[39m
+[2026-05-22 20:15:32:1532] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:32:1532] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:32.828Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":243,"ip":"::1"}[39m
+[2026-05-22 20:15:33:1533] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:33:1533] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:33.986Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":198,"ip":"::1"}[39m
+[2026-05-22 20:15:34:1534] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:34:1534] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:34.951Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":247,"ip":"::1"}[39m
+[2026-05-22 20:15:38:1538] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:15:38:1538] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:45:38.799Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":494,"ip":"::1"}[39m
+[2026-05-22 20:16:09:169] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:16:09:169] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:46:09.887Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1067,"ip":"::1"}[39m
+[2026-05-22 20:16:10:1610] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:16:10:1610] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:46:10.415Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":214,"ip":"::1"}[39m
+[2026-05-22 20:16:11:1611] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:16:11:1611] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:46:11.034Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":393,"ip":"::1"}[39m
+[2026-05-22 20:16:11:1611] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-22 20:16:11:1611] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T14:46:11.130Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":208,"ip":"::1"}[39m

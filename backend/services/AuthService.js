@@ -52,17 +52,15 @@ class AuthService {
 
     return {
       token: accessToken,
-      user: {
-        id: user.id,
-        userId: user.userId,
-        name: user.name,
-        role: user.role,
-        email: user.email,
-        mobile: user.mobile,
-        address: user.address,
-        hospitalName: user.hospitalName,
-        certifiedId: user.certifiedId,
-      },
+      id: user.id,
+      userId: user.userId,
+      name: user.name,
+      role: user.role,
+      email: user.email,
+      mobile: user.mobile,
+      address: user.address,
+      hospitalName: user.hospitalName,
+      certifiedId: user.certifiedId,
     };
   }
 
