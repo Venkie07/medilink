@@ -30,6 +30,10 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust Vercel/reverse proxy X-Forwarded-For headers
+// Required for express-rate-limit to correctly identify client IPs in production
+app.set('trust proxy', 1);
+
 // ---------------------
 // Global Middleware
 // ---------------------
