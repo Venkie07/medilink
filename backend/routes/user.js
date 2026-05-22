@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getAllUsers, updateUser } from '../controllers/userController.js';
+import { createUser, getAllUsers, updateUser, deleteUser } from '../controllers/userController.js';
 import { protect, authorize } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
 import { createUserSchema } from '../validators/schemas.js';
@@ -12,5 +12,6 @@ router.use(authorize('Admin'));
 router.post('/', validate(createUserSchema), createUser);
 router.get('/', getAllUsers);
 router.put('/:id', updateUser);
+router.delete('/:id', deleteUser);
 
 export default router;

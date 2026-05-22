@@ -21,6 +21,32 @@ class UserService {
     }
     return updatedUser;
   }
+
+  async deleteUser(id, adminId, adminPassword) {
+    if (!adminPassword) {
+      throw new AppError('Admin confirmation password is required.', 400);
+    }
+
+    const admin = await UserRepository.findById(adminId, false);
+    if (!admin) {
+      throw new AppError('Admin user not found.', 404);
+    }
+
+    const isMatch = await admin.comparePassword(adminPassword);
+    if (!isMatch) {
+      throw new AppError('Invalid administrator password.', 401);
+    }
+
+    if (id === adminId) {
+      throw new AppError('Self-deletion is prohibited.', 400);
+    }
+
+    const deleted = await UserRepository.delete(id);
+    if (!deleted) {
+      throw new AppError('User to delete not found.', 404);
+    }
+    return true;
+  }
 }
 
 export default new UserService();

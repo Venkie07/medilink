@@ -60,7 +60,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
       ];
     }
 
-    if (user?.role === 'Pharmacist') {
+    if (user?.role === 'Pharmacy' || user?.role === 'Pharmacist') {
       return [
         ...base,
         { icon: Pill, label: 'Pharmacy Queue', to: '/dashboard' }
@@ -111,7 +111,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
         </div>
 
         {/* Navigation Items */}
-        <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
+        <nav className={`flex-1 p-4 space-y-1.5 ${isCollapsed ? 'overflow-hidden' : 'overflow-y-auto'}`}>
           {getMenuItems().map((item, index) => (
             <SidebarItem 
               key={index} 

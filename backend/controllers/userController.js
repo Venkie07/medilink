@@ -20,3 +20,9 @@ export const updateUser = asyncHandler(async (req, res) => {
   const updated = await UserService.updateUser(req.params.id, req.body);
   res.status(200).json({ message: 'User updated successfully', user: updated });
 });
+
+export const deleteUser = asyncHandler(async (req, res) => {
+  const { adminPassword } = req.body;
+  await UserService.deleteUser(req.params.id, req.user.id, adminPassword);
+  res.status(200).json({ message: 'User deleted successfully' });
+});

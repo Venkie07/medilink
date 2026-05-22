@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -15,7 +16,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div 
@@ -48,7 +49,8 @@ const Modal = ({ isOpen, onClose, title, children }) => {
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

@@ -28,6 +28,13 @@ class UserRepository {
     if (!user) return null;
     return await user.update(updateData);
   }
+
+  async delete(id) {
+    const user = await User.findByPk(id);
+    if (!user) return false;
+    await user.destroy();
+    return true;
+  }
 }
 
 export default new UserRepository();
