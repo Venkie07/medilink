@@ -19,10 +19,12 @@ import labRoutes from './routes/lab.js';
 
 dotenv.config();
 
-// Ensure logs directory exists
-const logsDir = 'logs';
-if (!fs.existsSync(logsDir)) {
-    fs.mkdirSync(logsDir, { recursive: true });
+// Ensure logs directory exists (local development only)
+if (process.env.NODE_ENV !== 'production') {
+    const logsDir = 'logs';
+    if (!fs.existsSync(logsDir)) {
+        fs.mkdirSync(logsDir, { recursive: true });
+    }
 }
 
 const app = express();
