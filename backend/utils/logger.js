@@ -26,11 +26,14 @@ const format = winston.format.combine(
   )
 );
 
+const isVercel = process.env.VERCEL || process.env.NOW_REGION;
+const isProduction = process.env.NODE_ENV === 'production';
+
 const transports = [
   new winston.transports.Console(),
 ];
 
-if (process.env.NODE_ENV !== 'production') {
+if (!isProduction && !isVercel) {
   transports.push(
     new winston.transports.File({
       filename: 'logs/error.log',
