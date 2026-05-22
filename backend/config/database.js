@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 import logger from '../utils/logger.js';
+import pg from 'pg';
 
 dotenv.config();
 
@@ -15,20 +16,23 @@ logger.info('Connecting to production PostgreSQL/Supabase database...');
 
 const sequelize = new Sequelize(databaseUrl, {
   dialect: 'postgres',
+  dialectModule: pg, // IMPORTANT FIX
   protocol: 'postgres',
+
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: false, // Required for secure Supabase connectivity
+      rejectUnauthorized: false,
     },
   },
-  // Pool settings optimized for stateless Vercel Serverless execution
+
   pool: {
     max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000,
   },
+
   logging: false,
 });
 
