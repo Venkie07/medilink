@@ -1,7 +1,8 @@
 frontend/node_modules/
 frontend/dist/
+frontend/.env.production
+frontend/.env.local
 backend/node_modules/
 backend/dist/
 backend/.env
-frontend/.env.production
 doc/

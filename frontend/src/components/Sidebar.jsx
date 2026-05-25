@@ -19,14 +19,19 @@ import {
 const SidebarItem = ({ icon: Icon, label, to, isCollapsed }) => (
   <NavLink
     to={to}
+    end={to === '/dashboard'}
     className={({ isActive }) => `
       flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative
-      ${isActive ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'}
+      ${isActive ? 'bg-blue-600 text-white shadow-md font-semibold' : 'bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
       ${isCollapsed ? 'justify-center px-0 w-12 h-12 mx-auto' : ''}
     `}
   >
     <Icon size={20} className="shrink-0" />
-    {!isCollapsed && <span className="font-medium text-sm">{label}</span>}
+    {!isCollapsed && (
+      <span className="font-medium text-sm whitespace-nowrap overflow-hidden origin-left transition-all duration-300">
+        {label}
+      </span>
+    )}
     
     {/* Accessible tooltip when collapsed */}
     {isCollapsed && (
@@ -41,33 +46,10 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
   const { user, logout } = useAuth();
 
   const getMenuItems = () => {
-    const base = [
+    return [
       { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
       { icon: User, label: 'My Profile', to: '/dashboard/profile' }
     ];
-
-    if (user?.role === 'Doctor') {
-      return [
-        ...base,
-        { icon: Calendar, label: 'Appointments', to: '/dashboard/appointments' }
-      ];
-    }
-    
-    if (user?.role === 'Lab Technician') {
-      return [
-        ...base,
-        { icon: FlaskConical, label: 'Lab Queue', to: '/dashboard' }
-      ];
-    }
-
-    if (user?.role === 'Pharmacy' || user?.role === 'Pharmacist') {
-      return [
-        ...base,
-        { icon: Pill, label: 'Pharmacy Queue', to: '/dashboard' }
-      ];
-    }
-
-    return base;
   };
 
   return (
@@ -90,24 +72,26 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
       >
         {/* Logo Section */}
         <div className={`p-5 flex items-center justify-between border-b border-slate-100 ${isCollapsed ? 'justify-center' : ''}`}>
-          <div className="flex items-center gap-2.5">
+          <div className="hidden lg:flex items-center gap-2.5 overflow-hidden">
             <div className="bg-blue-600 p-2.5 rounded-xl text-white shadow-sm">
               <Stethoscope size={20} />
             </div>
             {!isCollapsed && (
-              <span className="text-lg font-bold text-slate-800 tracking-tight">
+              <span className="text-lg font-bold text-slate-800 tracking-tight whitespace-nowrap overflow-hidden transition-all duration-300">
                 MediLink
               </span>
             )}
           </div>
           
           {/* Close button on mobile */}
-          <button 
-            onClick={() => setIsMobileOpen(false)}
-            className="lg:hidden p-1 hover:bg-slate-100 rounded-lg text-slate-500"
-          >
-            <X size={20} />
-          </button>
+          <div className="lg:hidden flex w-full justify-end">
+            <button 
+              onClick={() => setIsMobileOpen(false)}
+              className="p-1 hover:bg-slate-100 rounded-lg text-slate-500"
+            >
+              <X size={20} />
+            </button>
+          </div>
         </div>
 
         {/* Navigation Items */}
@@ -126,12 +110,12 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
           {/* Desktop Collapse Toggle */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex items-center justify-center gap-2 w-full py-2 hover:bg-slate-50 border border-slate-100 rounded-xl text-slate-500 transition-all text-xs font-semibold"
+            className="hidden lg:flex items-center justify-center gap-2 w-full py-2 hover:bg-slate-50 border border-slate-100 rounded-xl text-slate-500 transition-all text-xs font-semibold overflow-hidden whitespace-nowrap"
           >
             {isCollapsed ? <ChevronRight size={16} /> : (
               <>
                 <ChevronLeft size={16} />
-                <span>Collapse Sidebar</span>
+                <span className="whitespace-nowrap overflow-hidden transition-all duration-300">Collapse Sidebar</span>
               </>
             )}
           </button>
@@ -145,7 +129,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
             `}
           >
             <LogOut size={20} className="shrink-0" />
-            {!isCollapsed && <span className="font-semibold text-sm">Sign Out</span>}
+            {!isCollapsed && <span className="font-semibold text-sm whitespace-nowrap overflow-hidden transition-all duration-300">Sign Out</span>}
             
             {isCollapsed && (
               <div className="absolute left-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-semibold px-2.5 py-1.5 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 whitespace-nowrap shadow-md">

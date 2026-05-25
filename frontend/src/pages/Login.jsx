@@ -8,15 +8,20 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
     try {
       const { data } = await api.post('/auth/login', { userId, password });
       login(data);
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,8 +37,6 @@ const Login = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {error && <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm">{error}</div>}
-          
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">User ID</label>
             <input
@@ -67,9 +70,14 @@ const Login = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn-primary w-full py-3 text-lg font-semibold">
+          <button type="submit" disabled={loading} className="btn-primary w-full py-3 text-lg font-semibold">
             Sign In
           </button>
+
+          <div className="text-center min-h-[24px]">
+            {loading && <p className="text-sm font-medium text-slate-500">Signing in... please wait.</p>}
+            {error && <p className="text-sm font-medium text-red-600 bg-red-50 py-1.5 px-3 rounded-lg inline-block">{error}</p>}
+          </div>
         </form>
 
         <div className="mt-8 pt-8 border-t border-slate-100">

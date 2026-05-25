@@ -125,22 +125,29 @@ const PatientDashboard = () => {
                         Lab Reports <ChevronRight size={20} className="text-slate-300" />
                     </h3>
                     <div className="space-y-4">
-                        {labTests.filter(t => t.status === 'Completed').length === 0 ? <p className="text-center py-6 text-slate-400 italic">No available reports</p> :
-                            labTests.filter(t => t.status === 'Completed').map(t => (
+                        {labTests.length === 0 ? <p className="text-center py-6 text-slate-400 italic">No assigned lab tests</p> :
+                            labTests.map(t => (
                                 <div key={t.id} className="flex items-center gap-4 p-4 bg-white/50 rounded-2xl border border-white group hover:border-primary-200 transition-all">
                                     <div className="bg-purple-100 p-3 rounded-xl text-purple-600">
                                         <FlaskConical size={20} />
                                     </div>
                                     <div className="flex-1">
                                         <p className="font-bold text-slate-700">{t.testName}</p>
-                                        <p className="text-[10px] text-slate-400 uppercase tracking-wider">{t.report?.uploadDate ? new Date(t.report.uploadDate).toLocaleDateString() : 'N/A'}</p>
+                                        {t.status === 'Completed' ? (
+                                            <p className="text-[10px] text-slate-400 uppercase tracking-wider">{t.report?.uploadDate ? new Date(t.report.uploadDate).toLocaleDateString() : 'N/A'}</p>
+                                        ) : (
+                                            <p className="text-[10px] text-amber-500 font-semibold uppercase tracking-wider">{t.status}</p>
+                                        )}
                                     </div>
-                                    <button
-                                        onClick={() => window.open(`http://localhost:5000/${t.report?.filePath}`)}
-                                        className="p-2 text-primary-600 hover:bg-primary-50 rounded-xl transition-all"
-                                    >
-                                        <Download size={20} />
-                                    </button>
+                                    {t.status === 'Completed' && t.report && (
+                                        <button
+                                            onClick={() => window.open(`http://localhost:5000/${t.report?.filePath}`)}
+                                            className="p-2 text-primary-600 hover:bg-primary-50 rounded-xl transition-all"
+                                            title="Download Report"
+                                        >
+                                            <Download size={20} />
+                                        </button>
+                                    )}
                                 </div>
                             ))
                         }

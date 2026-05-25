@@ -57,7 +57,7 @@ export const createPrescriptionSchema = z.object({
         frequency: z.string().min(1, 'Frequency is required'),
       })
     ).min(1, 'At least one medication is required'),
-    instructions: z.string().min(1, 'Instructions are required'),
+    instructions: z.string().optional().or(z.literal('')),
   }),
 });
 

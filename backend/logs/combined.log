@@ -97,3 +97,56 @@
 [2026-05-22 20:36:17:3617] [[32minfo[39m]: [32mEnvironment: development[39m
 [2026-05-22 20:37:14:3714] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
 [2026-05-22 20:37:14:3714] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-22T15:07:14.057Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1281,"ip":"::1"}[39m
+[2026-05-25 22:39:47:3947] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-25 22:39:47:3947] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-25 22:39:50:3950] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-25 22:39:50:3950] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-25 22:39:50:3950] [[32minfo[39m]: [32mEnvironment: production[39m
+[2026-05-25 22:40:24:4024] [[31merror[39m]: [31m500 - getaddrinfo ENOTFOUND db.erfithnssqzcksnrybrq.supabase.co - /api/auth/login - POST - ::1[39m
+[2026-05-25 22:40:24:4024] [[31merror[39m]: [31mAUDIT [SERVER_ERROR] {"timestamp":"2026-05-25T17:10:24.452Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":500,"durationMs":8794,"ip":"::1"}[39m
+[2026-05-25 22:40:24:4024] [[31merror[39m]: [31m500 - getaddrinfo ENOTFOUND db.erfithnssqzcksnrybrq.supabase.co - /api/auth/login - POST - ::1[39m
+[2026-05-25 22:40:24:4024] [[31merror[39m]: [31mAUDIT [SERVER_ERROR] {"timestamp":"2026-05-25T17:10:24.463Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":500,"durationMs":25,"ip":"::1"}[39m
+[2026-05-25 22:40:47:4047] [[31merror[39m]: [31m500 - getaddrinfo ENOTFOUND db.erfithnssqzcksnrybrq.supabase.co - /api/auth/login - POST - ::1[39m
+[2026-05-25 22:40:47:4047] [[31merror[39m]: [31mAUDIT [SERVER_ERROR] {"timestamp":"2026-05-25T17:10:47.398Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":500,"durationMs":5,"ip":"::1"}[39m
+[2026-05-25 22:48:44:4844] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-25 22:48:44:4844] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-25 22:48:51:4851] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-25 22:48:51:4851] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-25 22:48:51:4851] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-25 22:49:26:4926] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-25 22:49:26:4926] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-25 22:49:30:4930] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-25 22:52:32:5232] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-25 22:52:32:5232] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-25 22:52:36:5236] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-25 22:52:36:5236] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-25 22:52:36:5236] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-25 22:53:46:5346] [[31merror[39m]: [31m401 - Invalid credentials. - /api/auth/login - POST - ::1[39m
+[2026-05-25 22:53:46:5346] [[33mwarn[39m]: [33mAUDIT [CLIENT_ERROR] {"timestamp":"2026-05-25T17:23:46.134Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":401,"durationMs":1116,"ip":"::1"}[39m
+[2026-05-25 22:54:00:540] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-25 22:54:00:540] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:24:00.868Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1197,"ip":"::1"}[39m
+[2026-05-25 22:54:23:5423] [[32minfo[39m]: [32mUser login: patient_demo (Patient)[39m
+[2026-05-25 22:54:23:5423] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:24:23.108Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":845,"ip":"::1"}[39m
+[2026-05-25 23:00:11:011] [[32minfo[39m]: [32mUser login: doctor_demo (Doctor)[39m
+[2026-05-25 23:00:11:011] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:30:11.949Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1286,"ip":"::1"}[39m
+[2026-05-25 23:01:17:117] [[32minfo[39m]: [32mUser login: pharmacy_demo (Pharmacy)[39m
+[2026-05-25 23:01:17:117] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:31:17.907Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":891,"ip":"::1"}[39m
+[2026-05-25 23:01:31:131] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:31:31.324Z","method":"PATCH","path":"/api/prescriptions/e00bfe60-fae9-4e1b-b90a-e2682a8f2f82/status","actor":"pharmacy_demo","role":"Pharmacy","statusCode":200,"durationMs":1069,"ip":"::1"}[39m
+[2026-05-25 23:06:39:639] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-25 23:06:39:639] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-25 23:06:39:639] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-25 23:06:39:639] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-25 23:06:47:647] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-25 23:06:47:647] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-25 23:06:47:647] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-25 23:06:48:648] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-25 23:09:45:945] [[32minfo[39m]: [32mUser login: patient_demo (Patient)[39m
+[2026-05-25 23:09:45:945] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:39:45.605Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1078,"ip":"::1"}[39m
+[2026-05-25 23:17:25:1725] [[31merror[39m]: [31m401 - Invalid credentials. - /api/auth/login - POST - ::1[39m
+[2026-05-25 23:17:25:1725] [[33mwarn[39m]: [33mAUDIT [CLIENT_ERROR] {"timestamp":"2026-05-25T17:47:25.810Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":401,"durationMs":992,"ip":"::1"}[39m
+[2026-05-25 23:17:32:1732] [[32minfo[39m]: [32mUser login: doctor_demo (Doctor)[39m
+[2026-05-25 23:17:32:1732] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:47:32.537Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":264,"ip":"::1"}[39m
+[2026-05-25 23:18:26:1826] [[32minfo[39m]: [32mUser login: patient_demo (Patient)[39m
+[2026-05-25 23:18:26:1826] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:48:26.894Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1092,"ip":"::1"}[39m
+[2026-05-25 23:19:39:1939] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-25 23:19:39:1939] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-25T17:49:39.596Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1032,"ip":"::1"}[39m
