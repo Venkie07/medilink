@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('medilink_user');
+    const savedUser = sessionStorage.getItem('medilink_user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
@@ -19,14 +19,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem('medilink_user', JSON.stringify(userData));
+    sessionStorage.setItem('medilink_user', JSON.stringify(userData));
     navigate('/dashboard');
   };
 
   const logout = () => {
     setUser(null);
     clearApiCache();
-    localStorage.removeItem('medilink_user');
+    sessionStorage.removeItem('medilink_user');
     navigate('/login');
   };
 
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     if (user) {
         const updatedUser = { ...user, role };
         setUser(updatedUser);
-        localStorage.setItem('medilink_user', JSON.stringify(updatedUser));
+        sessionStorage.setItem('medilink_user', JSON.stringify(updatedUser));
     }
   };
 

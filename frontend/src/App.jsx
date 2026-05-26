@@ -15,8 +15,20 @@ import DoctorAppointments from './pages/dashboards/DoctorAppointments';
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) return <div>Loading...</div>;
-  if (!user) return <Navigate to="/login" />;
+  if (!user) return <Navigate to="/" replace />;
   return children;
+};
+
+const PublicRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+  if (loading) return <div>Loading...</div>;
+  return user ? <Navigate to="/dashboard" replace /> : children;
+};
+
+const RootRoute = () => {
+  const { user, loading } = useAuth();
+  if (loading) return <div>Loading...</div>;
+  return user ? <Navigate to="/dashboard" replace /> : <Login />;
 };
 
 const DashboardSelector = () => {
@@ -42,7 +54,11 @@ function App() {
     <AuthProvider>
       <Toaster position="top-right" reverseOrder={false} />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } />
         <Route path="/dashboard/*" element={
           <ProtectedRoute>
             <DashboardLayout>
@@ -65,7 +81,7 @@ function App() {
             </DashboardLayout>
           </ProtectedRoute>
         } />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<RootRoute />} />
       </Routes>
     </AuthProvider>
   );

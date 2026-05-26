@@ -14,7 +14,7 @@ export const clearApiCache = () => {
 };
 
 api.interceptors.request.use((config) => {
-  const user = JSON.parse(localStorage.getItem('medilink_user'));
+  const user = JSON.parse(sessionStorage.getItem('medilink_user'));
   if (user && user.token) {
     config.headers.Authorization = `Bearer ${user.token}`;
   }
