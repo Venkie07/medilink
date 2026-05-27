@@ -168,8 +168,144 @@ MediLink/
 │
 └── README.md
 ```
+---
+# Database Structure 
+
+
+
+  <a href="./database.svg">
+    <img src="./database.svg" alt="Database Structure" width="100%">
+  </a>
+
+
+<p align="center">
+  Click the diagram to zoom and navigate
+</p>
+
+<br>
+<br>
+
+<details>
+<summary>
+
+# Tables Details (click to view)
+
+</summary>
+
+## 1.Table `Appointments`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `date` | `date` |  |
+| `time` | `time` |  |
+| `status` | `enum_Appointments_status` |  Nullable |
+| `reason` | `text` |  Nullable |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
+| `patientId` | `uuid` |  Nullable |
+| `doctorId` | `uuid` |  Nullable |
+
+## 2.Table `LabReports`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `filePath` | `varchar` |  |
+| `resultSummary` | `text` |  Nullable |
+| `uploadDate` | `timestamptz` |  Nullable |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
+| `labTestId` | `uuid` |  Nullable |
+| `technicianId` | `uuid` |  Nullable |
+
+## 3.Table `LabTests`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `testName` | `varchar` |  |
+| `status` | `enum_LabTests_status` |  Nullable |
+| `requestedDate` | `date` |  Nullable |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
+| `patientId` | `uuid` |  Nullable |
+| `doctorId` | `uuid` |  Nullable |
+
+## 4.Table `Patients`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `patientId` | `varchar` |  Unique |
+| `age` | `int4` |  |
+| `gender` | `enum_Patients_gender` |  |
+| `qrCode` | `text` |  Nullable |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
+| `userId` | `uuid` |  Nullable |
+
+## 5.Table `PrescriptionItems`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `name` | `varchar` |  |
+| `dosage` | `varchar` |  |
+| `frequency` | `varchar` |  |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
+| `prescriptionId` | `uuid` |  Nullable |
+
+## 6.Table `Prescriptions`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `instructions` | `text` |  Nullable |
+| `date` | `date` |  Nullable |
+| `status` | `enum_Prescriptions_status` |  Nullable |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
+| `appointmentId` | `uuid` |  Nullable |
+| `doctorId` | `uuid` |  Nullable |
+| `patientId` | `uuid` |  Nullable |
+
+## 7.Table `Users`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `userId` | `varchar` |  Unique |
+| `password` | `varchar` |  |
+| `name` | `varchar` |  |
+| `role` | `enum_Users_role` |  |
+| `email` | `varchar` |  Nullable |
+| `mobile` | `varchar` |  Nullable |
+| `address` | `text` |  Nullable |
+| `hospitalName` | `varchar` |  Nullable |
+| `certifiedId` | `varchar` |  Nullable |
+| `createdAt` | `timestamptz` |  |
+| `updatedAt` | `timestamptz` |  |
 
 ---
+
+</details>
+
 
 ## 🚀 Quickstart & Seeding Demo Users
 

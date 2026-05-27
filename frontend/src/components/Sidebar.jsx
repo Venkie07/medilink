@@ -13,7 +13,7 @@ import {
   X,
   Pill,
   FlaskConical,
-  ClipboardList
+  ClipboardList,
 } from 'lucide-react';
 
 const SidebarItem = ({ icon: Icon, label, to, isCollapsed }) => (
@@ -73,7 +73,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
         {/* Logo Section */}
         <div className={`p-5 flex items-center justify-between border-b border-slate-100 ${isCollapsed ? 'justify-center' : ''}`}>
           <div className="hidden lg:flex items-center gap-2.5 overflow-hidden">
-            <div className="bg-blue-600 p-2.5 rounded-xl text-white shadow-sm">
+            <div className="bg-blue-600 p-2 mr-1 rounded-xl text-white shadow-sm">
               <Stethoscope size={20} />
             </div>
             {!isCollapsed && (
@@ -112,10 +112,10 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="hidden lg:flex items-center justify-center gap-2 w-full py-2 hover:bg-slate-50 border border-slate-100 rounded-xl text-slate-500 transition-all text-xs font-semibold overflow-hidden whitespace-nowrap"
           >
-            {isCollapsed ? <ChevronRight size={16} /> : (
+            {isCollapsed ? <ChevronRight size={20} /> : (
               <>
-                <ChevronLeft size={16} />
-                <span className="whitespace-nowrap overflow-hidden transition-all duration-300">Collapse Sidebar</span>
+                <ChevronLeft size={20} />
+                <span className="text-sm whitespace-nowrap overflow-hidden transition-all duration-300">Collapse Sidebar</span>
               </>
             )}
           </button>

@@ -6,3 +6,4 @@
 [2026-05-25 22:40:47:4047] [[31merror[39m]: [31mAUDIT [SERVER_ERROR] {"timestamp":"2026-05-25T17:10:47.398Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":500,"durationMs":5,"ip":"::1"}[39m
 [2026-05-25 22:53:46:5346] [[31merror[39m]: [31m401 - Invalid credentials. - /api/auth/login - POST - ::1[39m
 [2026-05-25 23:17:25:1725] [[31merror[39m]: [31m401 - Invalid credentials. - /api/auth/login - POST - ::1[39m
+[2026-05-27 20:53:53:5353] [[31merror[39m]: [31m401 - Invalid credentials. - /api/auth/login - POST - ::1[39m

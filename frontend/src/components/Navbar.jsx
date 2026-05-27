@@ -27,7 +27,7 @@ const Navbar = ({ isCollapsed, isMobileOpen, setIsMobileOpen }) => {
         {/* Desktop Welcome Text */}
         <div className="hidden lg:flex flex-col">
           <h2 className="text-base sm:text-lg font-bold text-slate-850">Welcome back, {user?.name}</h2>
-          <p className="text-[11px] sm:text-xs text-slate-500 font-medium">How's your day looking?</p>
+          {/* <p className="text-[11px] sm:text-xs text-slate-500 font-medium">How's your day looking?</p> */}
         </div>
       </div>
 
