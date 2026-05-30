@@ -22,6 +22,30 @@ const Appointment = sequelize.define('Appointment', {
   reason: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  source: {
+    type: DataTypes.ENUM('Manual', 'AIRequest'),
+    defaultValue: 'Manual'
+  },
+  consultationRequestId: {
+    type: DataTypes.UUID,
+    allowNull: true
+  },
+  aiSummary: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  severity: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  symptoms: {
+    type: DataTypes.JSONB,
+    allowNull: true
+  },
+  conversationId: {
+    type: DataTypes.UUID,
+    allowNull: true
   }
 }, {
   indexes: [

@@ -14,6 +14,7 @@ import {
   Pill,
   FlaskConical,
   ClipboardList,
+  BriefcaseMedical
 } from 'lucide-react';
 
 const SidebarItem = ({ icon: Icon, label, to, isCollapsed }) => (
@@ -32,7 +33,7 @@ const SidebarItem = ({ icon: Icon, label, to, isCollapsed }) => (
         {label}
       </span>
     )}
-    
+
     {/* Accessible tooltip when collapsed */}
     {isCollapsed && (
       <div className="absolute left-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-semibold px-2.5 py-1.5 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 whitespace-nowrap shadow-md">
@@ -42,10 +43,25 @@ const SidebarItem = ({ icon: Icon, label, to, isCollapsed }) => (
   </NavLink>
 );
 
+
 const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen }) => {
   const { user, logout } = useAuth();
-
   const getMenuItems = () => {
+    if (user?.role === 'Patient') {
+      return [
+        { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
+        { icon: User, label: 'My Profile', to: '/dashboard/profile' },
+        { icon: BriefcaseMedical, label: 'Medi Doctor', to: '/dashboard/MediDoctor' },
+        { icon: ClipboardList, label: 'Consultation Requests', to: '/dashboard/patient-consultations' }
+      ];
+    } else if (user?.role === 'Doctor') {
+      return [
+        { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
+        { icon: Calendar, label: 'Upcoming Appointments', to: '/dashboard/doctor-appointments' },
+        { icon: User, label: 'My Profile', to: '/dashboard/profile' },
+        { icon: ClipboardList, label: 'Consultation Requests', to: '/dashboard/doctor-consultations' }
+      ];
+    }
     return [
       { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
       { icon: User, label: 'My Profile', to: '/dashboard/profile' }
@@ -56,14 +72,14 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
     <>
       {/* Mobile Overlay Background */}
       {isMobileOpen && (
-        <div 
+        <div
           onClick={() => setIsMobileOpen(false)}
           className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden"
         />
       )}
 
       {/* Main Sidebar Element */}
-      <aside 
+      <aside
         className={`
           fixed inset-y-0 left-0 lg:static z-50 flex flex-col h-full bg-white border-r border-slate-200 transition-all duration-300
           ${isCollapsed ? 'w-20' : 'w-64'}
@@ -82,10 +98,10 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
               </span>
             )}
           </div>
-          
+
           {/* Close button on mobile */}
           <div className="lg:hidden flex w-full justify-end">
-            <button 
+            <button
               onClick={() => setIsMobileOpen(false)}
               className="p-1 hover:bg-slate-100 rounded-lg text-slate-500"
             >
@@ -97,10 +113,10 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
         {/* Navigation Items */}
         <nav className={`flex-1 p-4 space-y-1.5 ${isCollapsed ? 'overflow-hidden' : 'overflow-y-auto'}`}>
           {getMenuItems().map((item, index) => (
-            <SidebarItem 
-              key={index} 
-              {...item} 
-              isCollapsed={isCollapsed} 
+            <SidebarItem
+              key={index}
+              {...item}
+              isCollapsed={isCollapsed}
             />
           ))}
         </nav>
@@ -130,7 +146,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen })
           >
             <LogOut size={20} className="shrink-0" />
             {!isCollapsed && <span className="font-semibold text-sm whitespace-nowrap overflow-hidden transition-all duration-300">Sign Out</span>}
-            
+
             {isCollapsed && (
               <div className="absolute left-16 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-semibold px-2.5 py-1.5 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 whitespace-nowrap shadow-md">
                 Sign Out

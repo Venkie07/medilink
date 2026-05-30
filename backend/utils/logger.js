@@ -33,6 +33,8 @@ const transports = [
   new winston.transports.Console(),
 ];
 
+// File logging temporarily disabled for MediDoctor implementation per user request
+/*
 if (!isProduction && !isVercel) {
   transports.push(
     new winston.transports.File({
@@ -42,6 +44,7 @@ if (!isProduction && !isVercel) {
     new winston.transports.File({ filename: 'logs/combined.log' })
   );
 }
+*/
 
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',

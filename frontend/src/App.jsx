@@ -11,6 +11,9 @@ import LabDashboard from './pages/dashboards/LabDashboard';
 import PharmacyDashboard from './pages/dashboards/PharmacyDashboard';
 import Profile from './pages/dashboards/Profile';
 import DoctorAppointments from './pages/dashboards/DoctorAppointments';
+import MediDoctor from './pages/dashboards/MediDoctor';
+import PatientConsultations from './pages/dashboards/PatientConsultations';
+import DoctorConsultations from './pages/dashboards/DoctorConsultations';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -77,6 +80,9 @@ function App() {
                 <Route path="my-appointments" element={<DashboardSelector />} />
                 <Route path="my-prescriptions" element={<DashboardSelector />} />
                 <Route path="my-reports" element={<DashboardSelector />} />
+                <Route path="MediDoctor" element={<MediDoctor />} />
+                <Route path="patient-consultations" element={<PatientConsultations />} />
+                <Route path="doctor-consultations" element={<DoctorConsultations />} />
               </Routes>
             </DashboardLayout>
           </ProtectedRoute>

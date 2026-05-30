@@ -135,6 +135,88 @@ MediLink streamlines clinical environments through tailored dashboards utilizing
 
 ---
 
+### 🤖 MediDoctor AI Clinical Assistant
+
+MediDoctor is MediLink's intelligent AI-powered healthcare companion designed to bridge the gap between symptom discovery and professional medical consultation.
+
+#### Core Capabilities
+
+* **🩺 AI Symptom Assessment**
+
+  * Patients can chat naturally with MediDoctor about symptoms, concerns, and health conditions.
+  * The AI conducts structured follow-up questioning to gather relevant clinical context including duration, severity, associated symptoms, medications, allergies, and medical history.
+
+* **💬 Persistent Conversation History**
+
+  * Conversations are stored securely and can be resumed at any time.
+  * Patients can manage multiple conversations through a ChatGPT-style interface with searchable conversation history.
+
+* **📋 Clinical Assessment Generation**
+
+  * MediDoctor automatically generates structured consultation summaries containing:
+
+    * Reported Symptoms
+    * Severity Assessment
+    * Possible Areas of Concern
+    * Medical Context Collected
+    * Suggested Specialist Type
+  * Summaries help streamline doctor consultations and reduce repetitive questioning.
+
+* **👨‍⚕️ Doctor Consultation Requests**
+
+  * Patients can escalate any MediDoctor conversation into a formal consultation request.
+  * A doctor can be selected directly from the platform's registered healthcare providers.
+
+* **🔄 AI-to-Doctor Workflow**
+
+  * Full conversation history
+  * AI assessment history
+  * Consultation summary
+  * Patient details
+
+  are securely attached to the consultation request and shared with the selected doctor.
+
+* **📅 Automated Appointment Creation**
+
+  * Doctors can review consultation requests and either:
+
+    * Accept
+    * Reject
+
+  * Upon acceptance, the doctor schedules the consultation date and time.
+
+  * MediLink automatically creates and synchronizes appointments across patient and doctor dashboards.
+
+* **🔔 Real-Time Notifications**
+
+  * Consultation Submitted
+  * Consultation Accepted
+  * Consultation Rejected
+  * Appointment Scheduled
+  * Appointment Updates
+
+  are delivered directly through the MediLink notification system.
+
+* **🚨 Emergency Detection Layer**
+
+  * MediDoctor is configured to identify potentially critical symptoms and immediately advise users to seek emergency medical attention where appropriate.
+  * The system never replaces professional medical diagnosis and acts solely as a clinical decision-support assistant.
+
+#### Consultation Lifecycle
+
+Patient Chat
+→ AI Assessment
+→ Consultation Summary
+→ Doctor Selection
+→ Consultation Request
+→ Doctor Review
+→ Accept / Reject
+→ Appointment Scheduling
+→ Patient Notification
+→ Clinical Consultation
+
+
+
 ## 📂 System Directory Structure
 
 ```bash

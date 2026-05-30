@@ -42,12 +42,20 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use((response) => {
-  // Store successful GET responses in the cache
-  if (response.config.method === 'get' && response.status >= 200 && response.status < 300) {
-    routeCache.set(response.config.url, response.data);
+api.interceptors.response.use(
+  (response) => {
+    // Store successful GET responses in the cache
+    if (response.config.method === 'get' && response.status >= 200 && response.status < 300) {
+      routeCache.set(response.config.url, response.data);
+    }
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      window.dispatchEvent(new Event('auth_unauthorized'));
+    }
+    return Promise.reject(error);
   }
-  return response;
-});
+);
 
 export default api;

@@ -5,6 +5,10 @@ import Prescription from './Prescription.js';
 import PrescriptionItem from './PrescriptionItem.js';
 import LabTest from './LabTest.js';
 import LabReport from './LabReport.js';
+import MediDoctorConversation from './MediDoctorConversation.js';
+import MediDoctorMessage from './MediDoctorMessage.js';
+import DoctorConsultationRequest from './DoctorConsultationRequest.js';
+import Notification from './Notification.js';
 import sequelize from '../config/database.js';
 
 // User and Patient relationship
@@ -46,6 +50,30 @@ LabReport.belongsTo(LabTest, { foreignKey: 'labTestId' });
 User.hasMany(LabReport, { foreignKey: 'technicianId', as: 'uploadedReports' });
 LabReport.belongsTo(User, { foreignKey: 'technicianId', as: 'technician' });
 
+// MediDoctor relationships
+Patient.hasMany(MediDoctorConversation, { foreignKey: 'patientId', as: 'mediDoctorConversations' });
+MediDoctorConversation.belongsTo(Patient, { foreignKey: 'patientId', as: 'patient' });
+
+MediDoctorConversation.hasMany(MediDoctorMessage, { foreignKey: 'conversationId', as: 'messages', onDelete: 'CASCADE' });
+MediDoctorMessage.belongsTo(MediDoctorConversation, { foreignKey: 'conversationId', as: 'conversation' });
+
+// Consultation Request relationships
+Patient.hasMany(DoctorConsultationRequest, { foreignKey: 'patientId', as: 'consultationRequests' });
+DoctorConsultationRequest.belongsTo(Patient, { foreignKey: 'patientId', as: 'patient' });
+
+User.hasMany(DoctorConsultationRequest, { foreignKey: 'doctorId', as: 'doctorConsultationRequests' }); // user is doctor
+DoctorConsultationRequest.belongsTo(User, { foreignKey: 'doctorId', as: 'doctor' });
+
+MediDoctorConversation.hasOne(DoctorConsultationRequest, { foreignKey: 'conversationId', as: 'consultationRequest' });
+DoctorConsultationRequest.belongsTo(MediDoctorConversation, { foreignKey: 'conversationId', as: 'conversation' });
+
+DoctorConsultationRequest.belongsTo(Appointment, { foreignKey: 'appointmentId', as: 'appointment' });
+Appointment.hasOne(DoctorConsultationRequest, { foreignKey: 'appointmentId', as: 'consultationRequest' });
+
+// Notification relationships
+User.hasMany(Notification, { foreignKey: 'userId', as: 'notifications' });
+Notification.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
 export {
   User,
   Patient,
@@ -54,5 +82,9 @@ export {
   PrescriptionItem,
   LabTest,
   LabReport,
+  MediDoctorConversation,
+  MediDoctorMessage,
+  DoctorConsultationRequest,
+  Notification,
   sequelize
 };

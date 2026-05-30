@@ -136,7 +136,7 @@ const AdminDashboard = () => {
     const filteredUsers = users.filter(u => u.name.toLowerCase().includes(searchQuery.toLowerCase()) || u.userId.toLowerCase().includes(searchQuery.toLowerCase()));
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-2">
             {/* Mobile Layout */}
             <div className="space-y-4 lg:hidden">
                 {/* Main Card */}

@@ -177,3 +177,14 @@
 [2026-05-27 20:54:00:540] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-27T15:24:00.070Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":222,"ip":"::1"}[39m
 [2026-05-27 21:40:19:4019] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
 [2026-05-27 21:40:19:4019] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-27T16:10:19.816Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":1332,"ip":"::1"}[39m
+[2026-05-30 19:48:34:4834] [[32minfo[39m]: [32mConnecting to production PostgreSQL/Supabase database...[39m
+[2026-05-30 19:48:34:4834] [[32minfo[39m]: [32mSupabase storage client initialized successfully.[39m
+[2026-05-30 19:48:37:4837] [[32minfo[39m]: [32mDatabase synced successfully[39m
+[2026-05-30 19:48:37:4837] [[32minfo[39m]: [32mMediLink server running on port 5000[39m
+[2026-05-30 19:48:37:4837] [[32minfo[39m]: [32mEnvironment: development[39m
+[2026-05-30 19:50:02:502] [[32minfo[39m]: [32mUser login: admin_demo (Admin)[39m
+[2026-05-30 19:50:02:502] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-30T14:20:02.245Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":891,"ip":"::1"}[39m
+[2026-05-30 19:59:14:5914] [[32minfo[39m]: [32mUser login: patient_demo (Patient)[39m
+[2026-05-30 19:59:14:5914] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-30T14:29:14.033Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":946,"ip":"::1"}[39m
+[2026-05-30 20:15:34:1534] [[32minfo[39m]: [32mUser login: patient_demo (Patient)[39m
+[2026-05-30 20:15:34:1534] [[32minfo[39m]: [32mAUDIT [OK] {"timestamp":"2026-05-30T14:45:34.888Z","method":"POST","path":"/api/auth/login","actor":"anonymous","role":"unknown","statusCode":200,"durationMs":2171,"ip":"::1"}[39m

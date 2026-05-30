@@ -16,6 +16,8 @@ import patientRoutes from './routes/patient.js';
 import appointmentRoutes from './routes/appointment.js';
 import prescriptionRoutes from './routes/prescription.js';
 import labRoutes from './routes/lab.js';
+import mediDoctorRoutes from './routes/mediDoctor.js';
+import consultationRoutes from './routes/consultations.js';
 
 dotenv.config();
 
@@ -85,6 +87,8 @@ app.use('/api/v1/patients', patientRoutes);
 app.use('/api/v1/appointments', appointmentRoutes);
 app.use('/api/v1/prescriptions', prescriptionRoutes);
 app.use('/api/v1/lab', labRoutes);
+app.use('/api/v1/medidoctor', mediDoctorRoutes);
+app.use('/api/v1/consultations', consultationRoutes);
 
 // Backward compatibility — keep old /api/ paths working during migration
 app.use('/api/auth', authLimiter, authRoutes);
@@ -93,6 +97,8 @@ app.use('/api/patients', patientRoutes);
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/prescriptions', prescriptionRoutes);
 app.use('/api/lab', labRoutes);
+app.use('/api/medidoctor', mediDoctorRoutes);
+app.use('/api/consultations', consultationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
